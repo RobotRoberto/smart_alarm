@@ -2,6 +2,8 @@ from google.cloud import vision
 from google.oauth2 import service_account
 from picamera import PiCamera
 from time import sleep
+import datetime
+import os, io
 
 CRED_ERROR = \
     """
@@ -11,6 +13,11 @@ CRED_ERROR = \
     """
 
 SCOPE = 'https://www.googleapis.com/auth/cloud-platform'
+PEOPLE_NOT_FOUND = "Google Vision API did not find any person"
+
+PEOPLE_LABELS = set(['Arm', 'Leg', 'Waist', 'Face', 'Men', 'Women', 
+    'Shoulder', 'Hand', 'Eye', 'Nose', 'Mouth'
+    ])
 
 class Alarm:
 
@@ -24,5 +31,29 @@ class Alarm:
         self.camera = PiCamera()
 
     def take_a_picture(self):
-        sleep(1)
-        self.camera.capture('pic.jpg')
+        dir_name = os.getcwd() + '/pictures/' 
+        
+        if not os.path.exists(dir_name):
+            os.makedirs(dir_name)
+
+        file_name = dir_name + str(datetime.datetime.now()) + '.jpg'
+        self.camera.capture(file_name, format='jpeg')
+
+    def find_people_in_feed(self):
+        labels = []
+        
+        with io.BytesIO() as stream:
+           self.camera.capture(stream, format='jpeg')
+           content = stream.getvalue()
+           response = self.client.label_detection({
+                'content': content,
+           })
+                
+           labels = response.annotations
+
+        for label in labels:
+            if label.description in PEOPLE_LABELS:
+                return True
+
+        print(PEOPLE_NOT_FOUND)
+        return False
