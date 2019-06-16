@@ -15,8 +15,8 @@ CRED_ERROR = \
 SCOPE = 'https://www.googleapis.com/auth/cloud-platform'
 PEOPLE_NOT_FOUND = "Google Vision API did not find any person"
 
-PEOPLE_LABELS = set(['Arm', 'Leg', 'Waist', 'Face', 'Men', 'Women', 
-    'Shoulder', 'Hand', 'Eye', 'Nose', 'Mouth'
+PEOPLE_LABELS = set(['Arm', 'Leg', 'Waist', 'Face', 'Man', 'Woman', 
+    'Shoulder', 'Hand', 'Eye', 'Nose', 'Mouth', 'Human'
     ])
 
 class Alarm:
@@ -48,8 +48,8 @@ class Alarm:
            response = self.client.label_detection({
                 'content': content,
            })
-                
-           labels = response.annotations
+        
+           labels = response.label_annotations
 
         for label in labels:
             if label.description in PEOPLE_LABELS:
