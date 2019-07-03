@@ -31,7 +31,7 @@ class Alarm:
         self.camera = PiCamera()
 
     def take_a_picture(self):
-        dir_name = os.getcwd() + '/pictures/' 
+        dir_name = os.path.dirname(__file__) + '/pictures/' 
         
         if not os.path.exists(dir_name):
             os.makedirs(dir_name)
