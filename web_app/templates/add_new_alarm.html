@@ -1,0 +1,45 @@
+{% extends "base.html" %}
+{% block content %}
+
+    <div class="d-flex justify-content-center h-100 w-100">    
+        <form method="post">
+            <div class="form-group">
+                <h1 class="flex-row text-center">add a new alarm</h1>
+            </div>
+            <div class="weekDays-selector flex-row form-group mx-5">
+                <input type="checkbox" id="weekday-mon" class="weekday" name="mon" />
+                <label for="weekday-mon">Mon</label>
+                <input type="checkbox" id="weekday-tue" class="weekday" name="tue"/>
+                <label for="weekday-tue">Tue</label>
+                <input type="checkbox" id="weekday-wed" class="weekday" name="wed"/>
+                <label for="weekday-wed">Wed</label>
+                <input type="checkbox" id="weekday-thu" class="weekday" name="thu"/>
+                <label for="weekday-thu">Thu</label>
+                <input type="checkbox" id="weekday-fri" class="weekday" name="fri"/>
+                <label for="weekday-fri">Fri</label>
+                <input type="checkbox" id="weekday-sat" class="weekday" name="sat"/>
+                <label for="weekday-sat">Sat</label>
+                <input type="checkbox" id="weekday-sun" class="weekday" name="sun"/>
+                <label for="weekday-sun">Sun</label>
+            </div>
+            <div class="form-group row justify-content-center">
+                <label for="alarmTime col-form-label mx-2">pick a time to wake up</label>
+                <input class="timeinput rounded text-center mx-2" id="alarmTime" type="text" placeholder="Select Time..." name="time">
+            </div>
+            <div class="form-group row justify-content-center">
+                <input class="btn btn-primary mx-3" type="submit" value="submit">
+                <input class="btn btn-secondary mx-3" type="reset" value="reset">
+            </div>
+        </form>
+
+    </div>
+
+    <script type="text/javascript">
+        $('.timeinput').flatpickr({
+            enableTime: true,
+            noCalendar: true,
+            dateFormat: "H:i",
+            time_24hr: true
+        });
+    </script>
+{% endblock %}

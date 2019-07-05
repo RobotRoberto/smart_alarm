@@ -1,45 +1,26 @@
 {% extends "base.html" %}
 {% block content %}
+    <div class="container justify-content-center">
+	    <h2 class="text-center">list of alarms</h2>  
+		<div class="d-flex justify-content-center">
+		<ul>
+		{% for alarm_comment in crons %}
+			<div class="card border-primary mb-3" style="max-width: 18rem;"> 
+				<div class="card-body text-center">
+					<form action="{{ url_for('remove_alarm') }}" method=post>
+						<input class="text-center" type="text" value="{{ alarm_comment }}" name="comment" readyonly/>
+                		<input class="btn btn-primary m-3" type="submit" value="delete"/>
+					</form>
+				</div>
+			</div>
+		{% endfor %}
+		</ul>
+		</div>
+		<form action="{{ url_for('add_new_alarm') }}" method=get>
+			<div class="card-body text-center">
+				<input class="btn btn-primary mx-3" type="submit" value="add new alarms"/> 
+			</div>
+		</form>
+	</div>
 
-    <div class="d-flex justify-content-center h-100 w-100">    
-        <form method="post">
-            <div class="form-group">
-                <h1 class="flex-row text-center">add a new alarm</h1>
-            </div>
-            <div class="weekDays-selector flex-row form-group mx-5">
-                <input type="checkbox" id="weekday-mon" class="weekday" />
-                <label for="weekday-mon">Mon</label>
-                <input type="checkbox" id="weekday-tue" class="weekday" />
-                <label for="weekday-tue">Tue</label>
-                <input type="checkbox" id="weekday-wed" class="weekday" />
-                <label for="weekday-wed">Wed</label>
-                <input type="checkbox" id="weekday-thu" class="weekday" />
-                <label for="weekday-thu">Thu</label>
-                <input type="checkbox" id="weekday-fri" class="weekday" />
-                <label for="weekday-fri">Fri</label>
-                <input type="checkbox" id="weekday-sat" class="weekday" />
-                <label for="weekday-sat">Sat</label>
-                <input type="checkbox" id="weekday-sun" class="weekday" />
-                <label for="weekday-sun">Sun</label>
-            </div>
-            <div class="form-group row justify-content-center">
-                <label for="alarmTime col-form-label mx-2">pick a time to wake up</label>
-                <input class="timeinput rounded text-center mx-2" id="alarmTime" type="text" placeholder="Select Time..." name="time">
-            </div>
-            <div class="form-group row justify-content-center">
-                <input class="btn btn-primary mx-3" type="submit" value="submit">
-                <input class="btn btn-secondary mx-3" type="reset" value="reset">
-            </div>
-        </form>
-
-    </div>
-
-    <script type="text/javascript">
-        $('.timeinput').flatpickr({
-            enableTime: true,
-            noCalendar: true,
-            dateFormat: "H:i",
-            time_24hr: true
-        });
-    </script>
 {% endblock %}

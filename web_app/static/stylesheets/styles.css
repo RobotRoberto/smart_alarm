@@ -4,11 +4,11 @@
   
 .weekDays-selector input[type=checkbox] + label {
     display: inline-block;
-    border-radius: 6px;
+    border-radius: 5px;
     background: #dddddd;
-    height: 60px;
-    width: 60px;
-    line-height: 60px;
+    height: 40px;
+    width: 40px;
+    line-height: 40px;
     text-align: center;
     cursor: pointer;
 }
@@ -18,7 +18,3 @@
     color: #ffffff;
 }
 
-body {
-    font-family: monospace;
-    margin-top: 25%;
-}
