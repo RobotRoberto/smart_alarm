@@ -1,12 +1,12 @@
 from crontab import CronTab, CronItem
 
-command_str = '.virtualenvs/smart_alarm/bin/python projects/smart_alarm/script.py'
+command_str = '/home/pi/.virtualenvs/smart_alarm/bin/python3.5 /home/pi/projects/smart_alarm/script.py >> /home/pi/out.txt 2>&1'
 
 def _get_hour_minute(alarm_time: str):
     ## gets the index of ':' for minute and hour for schedule
     index = alarm_time.find(':')
-    minute = alarm_time[index + 1:]
-    hour = alarm_time[:index]
+    hour = alarm_time[index + 1:]
+    minute = alarm_time[:index]
     return int(hour), int(minute)
 
 
