@@ -52,5 +52,8 @@ def remove_alarm():
     return redirect(url_for('home'))
 
 if __name__ == '__main__':
-    app.run(debug=True, port=5000, host='192.168.1.142')
+    # Local ip address is the ip address of your Raspberry Pi, use nmap 
+    # in the bash terminal on your pi to figure out
+    local_ip = '192.168.1.142' 
+    app.run(debug=True, port=5000, host=local_ip)
 

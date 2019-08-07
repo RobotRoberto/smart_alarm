@@ -22,15 +22,22 @@ PEOPLE_LABELS = set(['Arm', 'Leg', 'Waist', 'Face', 'Man', 'Woman',
 class Alarm:
 
     def __init__(self, path=None):
-        
+        """
+        Sets up the credentials for the Google Cloud Platform and API service
+        with the camera module
+        """
         creds = service_account.Credentials.from_service_account_file(path)
         scoped_credentials = creds.with_scopes([SCOPE])
         self.client = vision.ImageAnnotatorClient(credentials=creds)
 
-
+        # Initializes the PiCamera
         self.camera = PiCamera()
 
     def take_a_picture(self):
+        """
+        Takes a picture and stores the result in the /pictures sub-directory,
+        used for debugging
+        """
         dir_name = os.path.dirname(__file__) + '/pictures/' 
         
         if not os.path.exists(dir_name):
@@ -40,6 +47,10 @@ class Alarm:
         self.camera.capture(file_name, format='jpeg')
 
     def find_people_in_feed(self):
+        """
+        Finds if Vision API labels any human body parts in the picture,
+        returns true if so.
+        """
         labels = []
         
         with io.BytesIO() as stream:

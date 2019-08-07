@@ -1,5 +1,6 @@
 from crontab import CronTab, CronItem
 
+## Not an ideal way to set the script up, to be changed in the future...
 command_str = '/home/pi/.virtualenvs/smart_alarm/bin/python3.5 /home/pi/projects/smart_alarm/script.py >> /home/pi/out.txt 2>&1'
 
 def _get_hour_minute(alarm_time: str):
@@ -11,10 +12,17 @@ def _get_hour_minute(alarm_time: str):
 
 
 def _get_alarm_times(item : CronItem) -> str:
+    """
+    Gets the alarm times using the CronItem passed in
+    """
     return str(item.dow) + " " + str(item.hour) + " " + str(item.minute)
 
 
 def get_user_cron_tabs():
+    """
+    Gets the user cron tabs set in the local environment, the comments are used
+    for displaying the date and time of alarms
+    """
     user_cron = CronTab(user=True)
     return [job.comment for job in user_cron]
 

@@ -5,6 +5,9 @@ import os
 
 
 def play_audio(file_name=None):
+    """
+    Plays the audio file given the file path name
+    """
     if file_name == None:
         return
 
@@ -14,12 +17,18 @@ def play_audio(file_name=None):
 
 
 def set_state(bulb=None, state=None):
+    """
+    Sets the state of the Lifx bulb 
+    """
     if not bulb or not state:
         return
 
     bulb.set_power(state)
 
 def init_bulb(num_lights=1):
+    """
+    Initializes the light bulb for use
+    """
     lifx = LifxLAN(num_lights)
     devices = lifx.get_lights()
 
@@ -28,9 +37,20 @@ def init_bulb(num_lights=1):
     return bulb
 
 if __name__ =='__main__':
+    """
+    The main script for running the alarm, initializes the bulb and searches
+    for people in the picture taken and uploaded to Google Vision API.
+    If API finds a person in the picture, then the script will play the alarm
+    sound. Then, the script will run again in 30 seconds to re-evaluate if
+    the person is still in bed.
+    """
     dirname = os.path.dirname(__file__)
-    path = os.path.join(dirname, 'SmartAlarm-01b89ee73267.json')
 
+    # If you are using this application for yourself, then update the API_KEY
+    # with your own path
+    API_KEY = 'SmartAlarm-01b89ee73267.json'
+    path = os.path.join(dirname, API_KEY)
+    
     try:
         bulb = init_bulb()
         set_state(bulb, "on")
