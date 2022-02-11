@@ -18,7 +18,7 @@ lifxlan==1.2.5
 MarkupSafe==1.1.1
 netifaces==0.10.9
 picamera==1.13
-protobuf==3.8.0
+protobuf==3.15.0
 pyasn1==0.4.5
 pyasn1-modules==0.2.5
 python-crontab==2.3.6
